@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>SafeHaven Roadmap</title>
+		<style>
+			/* Basic theme for remark slides */
+
+* {
+    .box-sizing(border-box);
+}
+*:before,
+*:after {
+    .box-sizing(border-box);
+}
+
+html {
+    font-size: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    line-height: 1;
+    color: #555555;
+    background-color: #FFFFFF;
+}
+
+li { 
+    margin: 20px 0 0 0;
+}
+
+.remark-slide-content li li {
+    margin: 0 0 15px 0;
+/*    line-height: 22px;*/
+    font-size: 20px;
+}
+
+
+a {
+    color: #00989e;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover, a:focus {
+    color: #00989e;
+    text-decoration: underline;
+}
+
+a:focus {
+    outline: 3px solid #00989e;
+    outline-offset: 0;
+    background-color: #00989e;
+    color: #FFF;
+    text-decoration: none;
+}
+
+ol {
+    padding: 0 0 0 1.5em;
+    margin: 1em 0;
+}
+
+ul {
+    margin: 1em 0;
+    padding: 0 0 0 1em;
+}
+
+img {
+    vertical-align: middle;
+    max-height: 600px;
+    margin: 0 auto 1em;
+    display: block;
+}
+
+hr {
+    height: 0;
+    margin: 1em 0;
+    border: 0;
+    border-top: 1px solid #cccccc;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    margin: 1em 0 0.5em;
+}
+
+b,
+strong {
+    font-weight: 500;
+}
+
+blockquote {
+    border-left: 5px solid #cccccc;
+    padding-left: 1em;
+    margin: 1em -1em;
+    font-style: italic;
+    color: #999999;
+}
+
+.remark-slide-number {
+    display: none;
+}
+
+.remark-slide {
+    display: table;
+}
+
+.remark-slide-content {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 4em;
+    font-size: 24px;
+}
+
+.remark-slide-content h1 {
+    font-size: 56px;
+    color: #00989e;
+}
+
+.remark-slide-content h2 {
+    font-size: 48px;
+    color: #00989e;
+}
+
+.remark-slide-content h3 {
+    font-size: 40px;
+    color: #00989e;
+}
+
+.remark-slide-content h4 {
+    font-size: 36px;
+    color: #00989e;
+}
+
+.remark-slide-content h5 {
+    font-size: 30px;
+    color: #00989e;
+}
+
+.remark-slide-content h6 {
+    font-size: 24px;
+    color: #00989e;
+}
+
+.remark-slide-content > :first-child {
+    margin-top: 0;
+}
+
+.remark-slide-content > :last-child {
+    margin-bottom: 0;
+}
+
+.remark-code-line {
+    white-space: normal;
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;
+    padding: 0 1em;
+}
+
+		</style>
+	</head>
+	<body>
+		<textarea id="source">
+name: agenga
+class: middle, center
+count: false
+layout: false
+
+# SafeHaven Roadmap
+---
+class: middle
+count: true
+# SafeHaven 3.1.1   
++ Automatic installation of LRA and makestub
+  - Speed up the overall on-boarding procedure
+  - The foundation of SafeHaven-CLC integration
++ Use iPXE boot to avoid boot-storm 
+  - Multiple servers booting from one SRN simultanieously causes
+  boot-storm
+  - Affected procedures include test-failover, failover and failback
++ Add new VMs to existing protection group
++ Remove VMs from existing protection group
++ Supports expansion of disks
++ Supports adding new disks
++ Supports guest with GUID Partition Table (GPT) disks
++ Fix deficiencies and bugs
+
+---
+class: middle
+count: true
+#Goals of Integration
++ A self-activating product 
+  - The DRaaS solution will be deployed with a few interactions
+  - Does not need on-boarding team
++ Continuous delivery
++ A comprehensive  DRaaS solution
+  - Protect servers with special applications such as database
+  - A more sophicated test-failover
+  - A profound way to solve the issue when sth goes wrong
+
+---
+class: middle
+count: true
+#Integrate DR MVP
++ Only supports CLC/PR to CLC/DR:
+  - Stand-alone SafeHaven supports all VMware based sites
+  - 90% of current customers DRaaS are vCenter to CLC
++ Web-based UI 
+  - Enable DRaaS 
+  - Every operation that SH  can do
++ Backend enhancements to achieve completely self-service
+  - Automatic DRaaS environment set up
+  - Automatically matches the stub NIC to source VM NIC
+  - Flexibility to add a VM to DRaaS or remove a VM from DRaaS
+  - Flexibility to expand disk or add disk
+  - Smart copy from iSCSI target to local disk during failback
+
+---
+class: middle
+count: true
++ SafeHaven backend interface for Web UI
+  - Develop a new set of SafeHaven API
+  - Refine the CMS console commands
++ Automatic updates to ensure continuous delivery
+  - Second Backup Device (SBD)
+  - Guest agents
++ Automated billing procedure
+---
+class: middle
+count: true
++ Application-aware checkpoints so that we could protect following servers:
+  - Database server 
+  - Sharepoint server
+  - Exchange server
+  - Active Directory server (if self-assigned IP is supported in DR)
++ Automatic network isolation for test failover
+  - Prevent the disrruption on PR when stand-by servers running with same
+  	hostnames but different IPs
+  - Current workaround is not sustainable and does not solve the
+  entire problem
++ Storage check-and-repair for Local Cache PG
+  - Quickly fix the DR broken image
+  - Local replica PG has this feature
+
+---
+class: middle 
+count: true
+# Future
++ Supports vCenter to CLC
++ Boot from local disk
+  - Current iSCSI boot causes major limitations and not
+  reliable
+  - Supports AWS to CLC
+  - Supports OpenStack to CLC
+  - Supports Physical machine to CLC
+  - Faster and elegant fail-back for Local Cache PG
++ Block-level replication for Linux
+ - Local Cache PG for Linux
+ - Synchronized replication improves RTO and RPO
++ Supports vCloud to  CLC
++ Supports object storage
++ Integrate backup with DRaaS
+  - Backup the overwritten checkpoints
+
+		</textarea>
+		<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
+		<script>
+			var slideshow = remark.create();
+		</script>
+		<script></script>
+	</body>
+</html>
